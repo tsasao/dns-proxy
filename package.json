@@ -1,0 +1,24 @@
+{
+  "name": "dns-proxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "dnsd": "^0.9.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsasao/dns-proxy.git"
+  },
+  "author": "SASAO Takahiro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tsasao/dns-proxy/issues"
+  },
+  "homepage": "https://github.com/tsasao/dns-proxy#readme"
+}
