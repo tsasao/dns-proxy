@@ -2,6 +2,7 @@ var dnsd = require('dnsd');
 var dns = require('dns');
 
 var port = 53;
+var ttl = 60;
 
 var parse_rule = function(str) {
     var pattern_result = str.split(/,/);
@@ -11,12 +12,16 @@ var parse_rule = function(str) {
     return { pattern: new RegExp(pattern_result[0]), replace: pattern_result[1] };
 };
 
-var args = process.argv.slice(2);
 var rules = [ ];
+var as_daemon = false;
+
+var args = process.argv.slice(2);
 while(0 < args.length && args[0].match(/^-/)) {
     var opt = args.shift();
     if(opt == '-p') {
 	port = args.shift();
+    } else if(opt == '-d') {
+	as_daemon = true;
     } else if(opt == '-s') {
 	rules.push(parse_rule(args.shift()));
     } else {
@@ -24,9 +29,12 @@ while(0 < args.length && args[0].match(/^-/)) {
     }
 }
 
-var ttl = 60;
+if(as_daemon) {
+    require('daemon')();
+};
+
 var server = dnsd.createServer(handler)
-.listen(port, '127.0.0.1')
+    .listen(port, '127.0.0.1')
 console.log('Server running at 127.0.0.1:'+port);
 
 function handler(req, res) {

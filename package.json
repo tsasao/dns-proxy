@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "daemon": "^1.1.0",
     "dnsd": "^0.9.6"
   },
   "devDependencies": {},
